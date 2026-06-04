@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   await resend.emails.send({
     from: "onboarding@resend.dev",
-    to: "simon.chvlr@icloud.com",
+    to: "simon@baillr.org",
     subject: "Nouvelle inscription — Baillr liste d'attente",
     html: `<p>Nouvelle inscription sur la liste d'attente Baillr :</p><p><strong>${email}</strong></p>`,
   });
