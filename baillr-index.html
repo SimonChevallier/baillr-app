@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baillr. — La location, sans le risque.</title>
+  <meta name="description" content="Baillr simplifie et sécurise la relation locative grâce à la technologie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #FFFFFF;
+      --off:     #F7F7F5;
+      --black:   #111111;
+      --dark:    #1A1A1A;
+      --muted:   #6B6B6B;
+      --border:  #E5E5E3;
+      --green:   #00C896;
+      --font:    'DM Sans', sans-serif;
+      --mono:    'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-logo span { color: #CCCCCC; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-cta {
+      background: var(--black) !important;
+      color: var(--white) !important;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+    }
+    .nav-cta:hover { opacity: 0.8 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: var(--white);
+      position: relative;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fade-up 0.7s 0.1s forwards;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    .hero h1 {
+      font-size: clamp(44px, 6.5vw, 88px);
+      font-weight: 600;
+      line-height: 1.0;
+      letter-spacing: -3px;
+      max-width: 860px;
+      opacity: 0;
+      animation: fade-up 0.8s 0.25s forwards;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #CCCCCC;
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 24px auto 0;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fade-up 0.8s 0.4s forwards;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+      opacity: 0;
+      animation: fade-up 0.8s 0.55s forwards;
+    }
+    .btn-primary {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 13px 24px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.75; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 13px 24px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-family: var(--font);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--black); border-color: #AAAAAA; }
+
+    /* Divider */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── DARK BAND ── */
+    .dark-band {
+      background: var(--dark);
+      color: var(--white);
+      padding: 80px 48px;
+    }
+    .dark-band .section-label { color: #666; }
+    .dark-band .section-title { color: var(--white); }
+    .dark-band .section-sub { color: #888; }
+
+    /* ── PROBLEM 2-col ── */
+    .problem-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-top: 60px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .problem-col {
+      background: var(--white);
+      padding: 40px;
+    }
+    .problem-col h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+    }
+    .problem-col p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .problem-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #CCCCCC;
+      margin-bottom: 16px;
+    }
+
+    /* ── FEATURES dark ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 60px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .feature-card {
+      background: #222;
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
+      padding: 32px;
+      transition: border-color 0.3s;
+    }
+    .feature-card:hover { border-color: #444; }
+    .feature-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 500;
+      color: #F0F0F0;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.65;
+    }
+
+    /* ── STEPS ── */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 60px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .step {
+      padding: 36px 28px;
+      border-right: 1px solid var(--border);
+      background: var(--white);
+    }
+    .step:last-child { border-right: none; }
+    .step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .step h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+    .step p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── WAITLIST ── */
+    .waitlist-section {
+      background: var(--off);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 100px 48px;
+      text-align: center;
+    }
+    .waitlist-section h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+    .waitlist-section p {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 300;
+      margin-bottom: 36px;
+    }
+    .waitlist-form {
+      display: flex;
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .waitlist-form input {
+      flex: 1;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 12px 16px;
+      color: var(--black);
+      font-size: 14px;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .waitlist-form input:focus { border-color: #AAAAAA; }
+    .waitlist-form input::placeholder { color: #BBBBBB; }
+    .waitlist-form button {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .waitlist-form button:hover { opacity: 0.75; }
+    .waitlist-note {
+      font-size: 12px;
+      color: #BBBBBB;
+      margin-top: 14px;
+      font-family: var(--mono);
+    }
+    .waitlist-success {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--green);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+    .footer-logo {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    .footer-logo span { color: #CCCCCC; }
+    .footer-copy {
+      font-size: 12px;
+      color: #CCCCCC;
+      font-family: var(--mono);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--black); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .section { padding: 60px 20px; }
+      .dark-band { padding: 60px 20px; }
+      .problem-cols { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .waitlist-section { padding: 60px 20px; }
+      .waitlist-form { flex-direction: column; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Baill<span>r</span>.</a>
+    <div class="nav-links">
+      <a href="#solution">Solution</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#waitlist" class="nav-cta">Rejoindre la liste</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <div class="dot"></div>
+      Bêta privée — Bientôt disponible
+    </div>
+    <h1>La location,<br><em>sans</em> le risque.</h1>
+    <p class="hero-sub">
+      Une plateforme qui protège chaque partie<br>
+      à chaque étape du contrat de location.
+    </p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">Rejoindre la liste d'attente</a>
+      <a href="#solution" class="btn-ghost">En savoir plus</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROBLEM -->
+  <div id="solution">
+    <div class="section reveal">
+      <div class="section-label">Le constat</div>
+      <h2 class="section-title">La location reste un terrain<br>miné pour tout le monde.</h2>
+      <p class="section-sub">Deux parties. Deux risques bien réels. Aucune solution satisfaisante aujourd'hui.</p>
+
+      <div class="problem-cols">
+        <div class="problem-col">
+          <div class="problem-num">01</div>
+          <h3>Le bailleur</h3>
+          <p>Impayés, procédures longues, absence de recours rapide. Le bailleur est exposé sans filet de sécurité efficace ni plateforme centralisée pour gérer sa location sereinement.</p>
+        </div>
+        <div class="problem-col">
+          <div class="problem-num">02</div>
+          <h3>Le locataire</h3>
+          <p>Caution retenue sans justification, état des lieux approximatif, impossible à contester. Le locataire n'a aucune protection réelle face à un bailleur de mauvaise foi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLUTION dark band -->
+  <div class="dark-band">
+    <div style="max-width:1100px; margin: 0 auto;" class="reveal">
+      <div class="section-label">Notre réponse</div>
+      <h2 class="section-title">Une plateforme.<br>Deux protections.</h2>
+      <p class="section-sub">Baillr centralise l'intégralité de la relation locative et couvre les deux parties contre leurs risques respectifs.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-num">01 —</div>
+          <h3>Contrat & paiements</h3>
+          <p>Signature électronique, paiements automatisés, historique complet. Tout est tracé et opposable.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">02 —</div>
+          <h3>État des lieux digitalisé</h3>
+          <p>Réalisé directement sur la plateforme avec photos horodatées. Traçabilité totale de l'état du bien.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">03 —</div>
+          <h3>Protection des deux parties</h3>
+          <p>En cas de litige, Baillr active automatiquement la couverture selon la nature du problème.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">04 —</div>
+          <h3>Intelligence artificielle</h3>
+          <p>En cas de contestation, notre IA analyse les états des lieux pour établir une vérité objective.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">05 —</div>
+          <h3>Système de notation</h3>
+          <p>Bailleurs et locataires sont évalués mutuellement. La transparence réduit les comportements abusifs.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">06 —</div>
+          <h3>Cadre assurantiel solide</h3>
+          <p>Baillr opère en partenariat avec un réassureur agréé. Le risque est porté par des professionnels.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div id="comment">
+    <div class="section reveal">
+      <div class="section-label">Fonctionnement</div>
+      <h2 class="section-title">Simple par design.</h2>
+      <p class="section-sub">Quatre étapes pour sécuriser une location de bout en bout.</p>
+
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-num">01 —</div>
+          <h4>Création du contrat</h4>
+          <p>Les deux parties signent électroniquement sur la plateforme.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02 —</div>
+          <h4>État des lieux</h4>
+          <p>Réalisé en photos géolocalisées directement depuis l'application.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03 —</div>
+          <h4>Paiements & prime</h4>
+          <p>Les loyers transitent par Baillr. Chaque partie est couverte automatiquement.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04 —</div>
+          <h4>Protection activée</h4>
+          <p>En cas de litige, la couverture se déclenche selon les conditions du contrat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAITLIST -->
+  <section id="waitlist" class="waitlist-section reveal">
+    <div class="section-label" style="text-align:center; margin-bottom:20px;">Accès anticipé</div>
+    <h2>Rejoignez la liste d'attente.</h2>
+    <p>Soyez parmi les premiers à tester Baillr lors de la bêta privée.</p>
+
+    <div class="waitlist-form" id="waitlistForm">
+      <input type="email" id="emailInput" placeholder="votre@email.fr">
+      <button onclick="submitWaitlist()">Rejoindre →</button>
+    </div>
+
+    <div class="waitlist-success" id="waitlistSuccess">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="7" stroke="#00C896" stroke-width="1.5"/>
+        <path d="M5 8l2.5 2.5L11 5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Vous êtes sur la liste. À bientôt.
+    </div>
+
+    <p class="waitlist-note">Aucun spam. Désabonnement en un clic.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Baill<span>r</span>.</div>
+    <div class="footer-copy">© 2026 Baillr</div>
+    <div class="footer-links">
+      <a href="mailto:simon@baillr.org">Contact</a>
+      <a href="#">Mentions légales</a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Waitlist
+    function submitWaitlist() {
+      const email = document.getElementById('emailInput').value;
+      if (!email || !email.includes('@')) {
+        document.getElementById('emailInput').style.borderColor = '#FFAAAA';
+        return;
+      }
+      document.getElementById('waitlistForm').style.display = 'none';
+      const s = document.getElementById('waitlistSuccess');
+      s.style.display = 'flex';
+      console.log('Waitlist:', email);
+    }
+    document.getElementById('emailInput').addEventListener('keypress', e => {
+      if (e.key === 'Enter') submitWaitlist();
+    });
+  </script>
+
+</body>
+</html>
