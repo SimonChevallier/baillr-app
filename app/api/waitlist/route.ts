@@ -1,0 +1,20 @@
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function POST(request: Request) {
+  const { email } = await request.json();
+
+  if (!email || !email.includes("@")) {
+    return Response.json({ error: "Email invalide" }, { status: 400 });
+  }
+
+  await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: "simon.chvlr@icloud.com",
+    subject: "Nouvelle inscription — Baillr liste d'attente",
+    html: `<p>Nouvelle inscription sur la liste d'attente Baillr :</p><p><strong>${email}</strong></p>`,
+  });
+
+  return Response.json({ success: true });
+}

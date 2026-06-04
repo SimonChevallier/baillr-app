@@ -5,15 +5,22 @@ import { useState } from "react";
 export default function Waitlist() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!email || !email.includes("@")) {
       setError(true);
       return;
     }
+    setLoading(true);
+    await fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    setLoading(false);
     setSubmitted(true);
-    console.log("Waitlist:", email);
   }
 
   return (
@@ -53,10 +60,11 @@ export default function Waitlist() {
           />
           <button
             onClick={handleSubmit}
-            className="bg-[#111111] text-white border-none px-5 py-3 rounded-[7px] text-[13px] font-medium whitespace-nowrap hover:opacity-75 transition-opacity duration-200 cursor-pointer"
+            disabled={loading}
+            className="bg-[#111111] text-white border-none px-5 py-3 rounded-[7px] text-[13px] font-medium whitespace-nowrap hover:opacity-75 transition-opacity duration-200 cursor-pointer disabled:opacity-50"
             style={{ fontFamily: "inherit" }}
           >
-            Rejoindre →
+            {loading ? "..." : "Rejoindre →"}
           </button>
         </div>
       ) : (
