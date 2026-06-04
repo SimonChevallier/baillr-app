@@ -9,12 +9,16 @@ export async function POST(request: Request) {
     return Response.json({ error: "Email invalide" }, { status: 400 });
   }
 
-  await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: "onboarding@resend.dev",
     to: "simon@baillr.org",
     subject: "Nouvelle inscription — Baillr liste d'attente",
     html: `<p>Nouvelle inscription sur la liste d'attente Baillr :</p><p><strong>${email}</strong></p>`,
   });
 
-  return Response.json({ success: true });
+  if (error) {
+    return Response.json({ error }, { status: 500 });
+  }
+
+  return Response.json({ success: true, id: data?.id });
 }
