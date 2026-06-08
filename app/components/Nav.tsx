@@ -24,6 +24,12 @@ export default function Nav() {
           Comment ça marche
         </a>
         <a
+          href="/login"
+          className="text-[#6B6B6B] no-underline text-[14px] hover:text-[#111111] transition-colors duration-200"
+        >
+          Connexion
+        </a>
+        <a
           href="#waitlist"
           className="bg-[#111111] text-white px-[18px] py-2 rounded-[6px] text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-200"
         >
