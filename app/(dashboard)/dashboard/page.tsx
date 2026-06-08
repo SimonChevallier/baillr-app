@@ -1,5 +1,6 @@
 import { createClient } from "@/app/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -47,12 +48,12 @@ export default async function DashboardPage() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white border border-[#E5E5E3] rounded-[12px] p-6">
+          <Link href="/dossiers" className="bg-white border border-[#E5E5E3] rounded-[12px] p-6 hover:border-[#AAAAAA] transition-colors no-underline block">
             <div className="font-mono text-[11px] text-[#CCCCCC] mb-3">01 —</div>
-            <h3 className="text-[15px] font-semibold mb-1.5">Dossiers de location</h3>
+            <h3 className="text-[15px] font-semibold mb-1.5 text-[#111111]">Dossiers de location</h3>
             <p className="text-[13px] text-[#6B6B6B]">Gérez vos contrats et documents.</p>
-            <div className="mt-4 text-[13px] text-[#BBBBBB] font-mono">Bientôt disponible</div>
-          </div>
+            <div className="mt-4 text-[13px] text-[#111111] font-medium">Accéder →</div>
+          </Link>
 
           <div className="bg-white border border-[#E5E5E3] rounded-[12px] p-6">
             <div className="font-mono text-[11px] text-[#CCCCCC] mb-3">02 —</div>
